@@ -2,52 +2,23 @@ User:
   type: "object"
   properties:
     id:
-      type: "integer"
-      format: "int64"
-    username:
       type: "string"
-    birthday:
+    username:
       type: "string"
     name:
       type: "string"
     email:
       type: "string"
-      nullable: true
     password:
       type: "string"
-    phone:
-      type: "string"
-    avatarUrl:
-      type: "string"
-    gender:
-      type: "string"
-    childrenLinked:
-      type: "array"
-      items:
-        type: object
-        properties:
-          username:
-            type: string
-          avatarUrl:
-            type: string
-          id:
-            type: number
     userRole:
       type: "string"
-      enum: [ADMIN, PARENT, CHILDREN]
-  example:
-    id: 1
-    username: vduy
-    birthday: "01-02-1992"
-    name: Duy Vu
-    email: vduy@yopmail.com
-    password: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9"
-    phone: "0335214215"
-    avatarUrl: http://image.url1.com/
-    gender: male
-    childrenLinked: [pop, kid]
-    userRole: PARENT
-    dryrun: true
+      enum: [ADMIN, NORMAL_USER]
+    loginType:
+      type: "string"
+      enum: [NORMAL, GMAIL]
+    googleTokenId: 
+      type: "string"
 
 UserInformation:
   allOf:
@@ -66,30 +37,6 @@ UserInformation:
               type: string
             id:
               type: number
-  example:
-    id: 12
-    username: pop
-    birthday: "01-02-2015"
-    name: Pop
-    email: null
-    password: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9"
-    phone: null
-    avatarUrl: http://image.url22.com/
-    gender: male
-    childrenLinked:
-      - username: soda
-        avatarUrl: http://image.url1.com/
-        id: 11
-      - username: tuananh123
-        avatarUrl: http://image.url1.com/
-        id: 12
-    userRole: CHILDREN
-    parentEmail: vduy@yopmail.com
-    createdAt: 2020-11-15 13:40:58
-    parentInformation:
-      email: vduy@yopmail.com
-      avatarUrl: http://image.url1.com/
-      id: 11
 
 ChildrenUsers:
   type: array
@@ -128,28 +75,6 @@ ChildStatistics:
               type: integer
             emptyAnswers:
               type: integer
-  example:
-    id: 1
-    username: pop1234
-    birthday: "01-02-2002"
-    name: Pop
-    email: null
-    password: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9"
-    phone: "0335214215"
-    avatarUrl: http://image.url1.com/
-    gender: male
-    childrenLinked: []
-    userRole: CHILDREN
-    parentEmail: vduy@yopmail.com
-    completedCourse: 20
-    totalLearningTime: 3600
-    quizzesStat:
-      done: 43
-      highestScore: 98
-      lowestScore: 76
-      correctAnswers: 100
-      incorrectAnswers: 20
-      emptyAnswers: 12
 
 ChildrenStatistics:
   type: array
@@ -200,39 +125,6 @@ ParentChildrenCourse:
             type: string
           coursesDetail:
             $ref: "./course.yml#/PersonalCourse"
-  example:
-    children:
-      - soda
-        tuananh123
-    courses:
-      - childName: soda
-        coursesDetail:
-          - name: Tieng anh 6
-            duration: 1800
-            members: 50
-            authors: Duy Vu
-            courseImageUrl: "https://123.com"
-            userCourseProcess: 80
-          - name: Tieng anh 7
-            duration: 1800
-            members: 50
-            authors: Duy Vu
-            courseImageUrl: "https://123.com"
-            userCourseProcess: 90
-      - childName: tuananh123
-        coursesDetail:
-          - name: Math 6
-            duration: 1800
-            members: 50
-            authors: Duy Vu
-            courseImageUrl: "https://123.com"
-            userCourseProcess: 100
-          - name: Tieng anh 7
-            duration: 1800
-            members: 50
-            authors: Duy Vu
-            courseImageUrl: "https://123.com"
-            userCourseProcess: 50
 
 TeacherContactInfo:
   type: array
@@ -245,10 +137,3 @@ TeacherContactInfo:
         type: string
       courseTitle:
         type: string
-  example:
-    - timestamp: 1621766781
-      title: Ket qua bai quiz be soda
-      courseTitle: Tieng anh lop 7
-    - timestamp: 1621766781
-      title: Ket qua bai quiz be tuan anh
-      courseTitle: Toan lop 7

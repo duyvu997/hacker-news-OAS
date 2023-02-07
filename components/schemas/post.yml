@@ -1,0 +1,88 @@
+Post:
+  type: object
+  properties:
+    id:
+      type: string
+    title:
+      type: string
+    link:
+      type: string
+      format: uri
+    postType:
+      type: string
+      enum: [Category1, Category2]
+    upVote:
+      type: number
+    downVote:
+      type: number
+    description:
+      type: string
+    createdAt: 
+      type: string
+      format: date
+    createdById: 
+      type: string
+    createdByName: 
+      type: string
+    status: 
+      type: string
+      enum: [PEDNING, APPROVED, REJECTED]
+    comments:
+      type: array
+      items:
+        $ref: "#/Comment"
+          
+          
+ 
+Posts: 
+  type: array
+  items:
+    $ref: "#/Post"
+
+ReplyComment:
+  type: object
+  properties:
+    id:
+      type: string
+    content:
+      type: string
+    createdAt: 
+      type: string
+      format: date
+    createdById: 
+      type: string
+    createdByName: 
+      type: string
+
+Comment: 
+  type: object
+  properties:
+    id:
+      type: string
+    content:
+      type: string
+    createdAt: 
+      type: string
+      format: date
+    createdById: 
+      type: string
+    createdByName: 
+      type: string
+    replies:
+      type: array
+      items:
+        $ref: "#/ReplyComment"
+
+CreatePostBody:
+  type: object
+  properties:
+    title:
+      type: string
+    link:
+      type: string
+      format: uri
+    postType:
+      type: string
+      enum: [Category1, Category2]
+    description:
+      type: string
